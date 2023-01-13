@@ -1,0 +1,36 @@
+                /* Reset Elements */
+
+@import "./reset.css";
+ 
+                /* Decler Project Fonts */
+
+@font-face {
+    font-family: "Vazir";
+    src: url("./Assets/Fonts/Vazir-FD.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Vazir-Bold";
+    src: url("./Assets/Fonts/Vazir-Bold-FD.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Vazir-Medium";
+    src: url("./Assets/Fonts/Vazir-Medium-FD.ttf") format("truetype");
+}
+
+                /* /Decler Project Fonts */
+
+:root {
+    --white: #ffffff;
+    --white-50: #f0f0f0;
+    --blue : #471AAA;
+}
+
+body {
+    background-color: var(--white-50);
+    display: flex;
+    direction: rtl;
+}
+
+*, body, html {
+    font-family: "Vazir";
+}

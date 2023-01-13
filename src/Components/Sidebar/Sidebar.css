@@ -1,0 +1,40 @@
+.sidebar {
+    position: fixed;
+    background-color: var(--blue);
+    height: 100vh;
+    flex: 1;
+}
+.sibebar-title {
+    font-family: "Vazir-Bold";
+    font-size: 1.4rem;
+    color: var(--white);
+    padding: 15px;
+    text-align: right;
+    border-bottom: 2px solid #6c48bb;
+}
+.sidebar-link {
+    margin-top: 1.25rem;
+
+}
+
+.sidebar-link li {
+    position: relative;
+    padding: 1rem;
+}
+
+.sidebar-link li a {
+    width: 100%;
+    color: var(--white);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+.sidebar-link li:first-child {
+    margin-bottom: 1.25rem;
+}
+
+.sidebar-link li.active {
+    background-color: #391588;
+}
