@@ -2,4 +2,4 @@
 
 - Persian-CMS
 
-- This file will update soon.git comm
+- This file will update soon
