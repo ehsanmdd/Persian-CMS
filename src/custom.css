@@ -20,13 +20,22 @@
                 /* /Decler Project Fonts */
 
 :root {
-    --white: #ffffff;
-    --white-50: #f0f0f0;
+    --color-light:                  rgba(132, 139, 200, 0.18);
+    --color-info-dark:              #7d8da1;
+    --color-dark:                   #363949;
+    --color-primary:                #7380ec;
+    --white: #f6f6f9;
+    --text-title-color: #858585;
     --blue : #471AAA;
+    --box-shadow-1:                   0 2rem 3rem rgba(0, 0, 0, 0.18);;
+
+    --card-border-radius:           2rem;
+
+    --card-padding:                 1.8rem;
 }
 
 body {
-    background-color: var(--white-50);
+    background-color: var(--white);
     display: flex;
     direction: rtl;
 }

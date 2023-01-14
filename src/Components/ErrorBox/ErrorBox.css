@@ -1,0 +1,18 @@
+.empty__error {
+    color: var(--color-info-dark);
+    background: var(--color-white);
+    padding: var(--card-padding);
+    border-radius: .5rem;
+    margin-top: 1rem;
+    box-shadow: var(--box-shadow-1);
+    transition: all 300ms ease;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin: 2rem 10rem;
+}
+
+.empty__error:hover {
+    box-shadow: none;
+    color: tomato;
+}

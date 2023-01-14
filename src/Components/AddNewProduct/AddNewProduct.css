@@ -1,0 +1,63 @@
+.addProduct {
+    padding-top: 2rem;
+    margin: 2rem 10rem;
+    background-color: var(--color-white);
+}
+.addProduct__title {
+    font-size: 2rem;
+    color: var(--color-dark);
+}
+.addProduct__form {
+    margin-top: 30px;
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: var(--box-shadow-1);
+    transition: all 300ms ease-out;
+}
+.addProduct__form:hover {
+    box-shadow: none;
+}
+.addProdcut__form__wrapper {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 15px;
+}
+
+.addProduct__form__group {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    width: 50%;
+    background-color: var(--color-light);
+    padding: 0 20px;
+    border-radius: 10px;
+}
+
+.addProduct__form__group__wrapper--input {
+    outline: none;
+    border: none;
+    background: none;
+    border-radius: .2rem;
+    padding: 8px 10px;
+}
+
+.addProduct__form__group__wrapper--input::placeholder {
+    color: var(--color-info-dark);
+}
+
+.addProduct__form__group--btn {
+    all: unset;
+    padding: 0.5rem 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: .4rem;
+    background-color: var(--color-primary);
+    color: var(--white);
+    cursor: pointer;
+}
