@@ -1,12 +1,13 @@
 .tabale__container {
+
+}
+
+.products__table {
     margin-top: 50px;
     background-color: var(--white);
     border-radius: .5rem;
     margin: 5rem 10rem;
     box-shadow: var(--box-shadow-1);
-}
-
-.products__table {
     padding: 0 2rem;
 }
 

@@ -2,11 +2,16 @@ import React, { useState } from 'react'
 import DeleteModal from '../DeleteModal/DeleteModal'
 import "./ProductsTable.css"
 import DetailsModal from '../DetailsModal/DetailsModal'
+import EditModal from '../EditModal/EditModal'
 
 function ProductsTable() {
 
     const [isShowDeleteModal, setIsShowDeleteModal] = useState(false)
+
     const [isShowDetailsModal, setIsShowDetailsModal] = useState(false)
+
+    const [isShowEditModal, setIsShowEditModal] = useState(false)
+
 
     const modalSubmitAction = () => {
         setIsShowDeleteModal(false)
@@ -14,9 +19,15 @@ function ProductsTable() {
     const modalCancelAction = () => {
         setIsShowDeleteModal(false)
     }
-
-    const closeDtailModal = () => {
+    const closeDetailModal = () => {
         setIsShowDetailsModal(false)
+    }
+
+
+    const updateProductInfo = (event) => {
+        event.preventDefault()
+        console.log("Submited")
+        setIsShowEditModal(false)
     }
 
     return (
@@ -41,7 +52,7 @@ function ProductsTable() {
                         <td className="product__table__header--info">
                             <button className='product__table--btnInfo' onClick={() => setIsShowDetailsModal(true)}>جزئیات</button>
                             <button className='product__table--btnDelete' onClick={() => setIsShowDeleteModal(true)}>حذف</button>
-                            <button className='product__table--btnEdit'>ویرایش</button>
+                            <button className='product__table--btnEdit' onClick={() => setIsShowEditModal(true)}>ویرایش</button>
                         </td>
                     </tr>
                 </tbody>
@@ -56,9 +67,15 @@ function ProductsTable() {
             {
                 isShowDetailsModal &&
                 <DetailsModal
-                    onHide={closeDtailModal}
+                    onHide={closeDetailModal}
                 />
             }
+            {
+                isShowEditModal &&
+                <EditModal
+                    onClose={() => setIsShowEditModal(false)}
+                    onSubmit={updateProductInfo}>
+                </EditModal>}
         </>
     )
 }
