@@ -1,0 +1,25 @@
+.detailes__modal {
+    padding: 20px 90px;
+    background-color: var(--white);
+    font-size: 1rem;
+    border-radius: .5rem;
+}
+.details__modal__table {
+    margin-top: 20px;
+    width: 100%;
+    background-color: var(--white);
+}
+
+.details__modal__table tr {
+    text-align: center;
+}
+
+.details__modal__table th {
+    font-family: "Vazir-Bold";
+    padding-bottom: 1rem;
+}
+
+.details__modal__table td {
+    padding: 20px 50px;
+    font-size: 1.1rem;
+}
