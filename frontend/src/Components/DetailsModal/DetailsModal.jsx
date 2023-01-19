@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import "./DetailsModal.css"
 import { wait } from '@testing-library/user-event/dist/utils'
 
-function DetailsModal({ onHide }) {
+function DetailsModal({ onHide , children }) {
 
   useEffect(() => {
     const checkEvent = (event) => {
@@ -25,22 +25,7 @@ function DetailsModal({ onHide }) {
         exit={{ opacity: 0 }}
       >
         <motion.div className="detailes__modal ">
-          <table className="details__modal__table">
-            <thead>
-              <tr>
-                <th>اسم</th>
-                <th>قیمت</th>
-                <th>محبوبیت</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>لپتاپ</td>
-                <td>12.000.000</td>
-                <td>91</td>
-              </tr>
-            </tbody>
-          </table>
+         { children }
         </motion.div>
       </motion.div>
     </AnimatePresence>
