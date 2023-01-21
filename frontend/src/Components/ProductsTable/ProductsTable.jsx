@@ -13,13 +13,12 @@ import EditModal from '../EditModal/EditModal'
 import ErrorBox from '../ErrorBox/ErrorBox';
 import "./ProductsTable.css"
 
-function ProductsTable() {
+function ProductsTable({allProducts, getAllProducts}) {
 
 
     const [isShowDeleteModal, setIsShowDeleteModal] = useState(false)
     const [isShowDetailsModal, setIsShowDetailsModal] = useState(false)
     const [isShowEditModal, setIsShowEditModal] = useState(false)
-    const [allProducts, setAllProducts] = useState([])
     const [productID, setProductID] = useState(null)
     const [mainProductInfo, setMainProductInfo] = useState({})
 
@@ -32,15 +31,6 @@ function ProductsTable() {
     const [productAmount, setProductAmount] = useState("")
     const [productColors, setProductColors] = useState("")
 
-    useEffect(() => {
-        getAllProducts();
-    }, [])
-
-    const getAllProducts = () => {
-        fetch("http://localhost:8000/api/products/")
-            .then((res) => res.json())
-            .then((productsItem) => setAllProducts(productsItem))
-    }
 
     const modalSubmitAction = () => {
         console.log("Deleted");
@@ -107,7 +97,7 @@ function ProductsTable() {
                         </tr>
                     </thead>
                     <tbody>
-                        {allProducts.map(product => (
+                        {allProducts.reverse().map(product => (
                             <tr key={product.id} className="product__table__body">
                                 <td className="product__table__header--info">
                                     <img src={product.img} alt="product img" className='product__table--img' />

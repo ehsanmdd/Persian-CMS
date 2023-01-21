@@ -9,6 +9,7 @@ Bugs :
 - data in table and tables.
 - farmer motion exit animated not okay.
 - delete product button not work for all data.
+- reverse product list then render the DOM.         fixed
 
 
 ---------------------------------------------------

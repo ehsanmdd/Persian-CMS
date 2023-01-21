@@ -44,6 +44,7 @@
     background: none;
     border-radius: .2rem;
     padding: 8px 10px;
+    width: 100%;
 }
 
 .addProduct__form__group__wrapper--input::placeholder {
