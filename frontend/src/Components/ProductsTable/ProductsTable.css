@@ -72,6 +72,7 @@
 .product__table__form__group__icon {
     display: flex;
     align-items: center;
+    color: gray;
 }
 .product__table__form__group__input {
     outline: none;

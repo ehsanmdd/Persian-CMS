@@ -23,7 +23,7 @@ export default function EditModal({ children, onClose, onSubmit }) {
                 exit={{ opacity: 0 }}
             >
                 <form className="editModal__form">
-                    <h1 className="editModal__form__title">اصلاعات جدید را وارد نمایید</h1>
+                    <h1 className="editModal__form__title">اطلاعات جدید را وارد نمایید</h1>
                     {children}
 
                     <button className="editModal__form__submit" onClick={onSubmit}>ثبت</button>

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { motion, AnimatePresence } from "framer-motion"
 import "./DetailsModal.css"
-import { wait } from '@testing-library/user-event/dist/utils'
 
 function DetailsModal({ onHide , children }) {
 

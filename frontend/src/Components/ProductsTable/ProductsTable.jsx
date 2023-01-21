@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { BsCurrencyDollar } from 'react-icons/bs';
+import { MdTitle } from 'react-icons/md';
+import { MdInventory2 } from 'react-icons/md';
+import { BsFileImage } from 'react-icons/bs';
+import { AiFillLike } from 'react-icons/ai';
+import { FaSortAmountUp } from 'react-icons/fa';
+import { HiColorSwatch } from 'react-icons/hi';
 
 import DeleteModal from '../DeleteModal/DeleteModal'
 import DetailsModal from '../DetailsModal/DetailsModal'
@@ -17,6 +23,14 @@ function ProductsTable() {
     const [productID, setProductID] = useState(null)
     const [mainProductInfo, setMainProductInfo] = useState({})
 
+
+    const [productTitle, setProductTitle] = useState("")
+    const [productPrice, setProductPrice] = useState("")
+    const [productCount, setProductCount] = useState("")
+    const [productImg, setProductImg] = useState("")
+    const [productPopularity, setProductPopularity] = useState("")
+    const [productAmount, setProductAmount] = useState("")
+    const [productColors, setProductColors] = useState("")
 
     useEffect(() => {
         getAllProducts();
@@ -49,10 +63,36 @@ function ProductsTable() {
 
 
     const updateProductInfo = (event) => {
-        event.preventDefault()
-        console.log("Submited")
-        setIsShowEditModal(false)
-    }
+        event.preventDefault();
+
+        const newPorductInfo = {
+            title: productTitle,
+            price: productPrice,
+            count: productCount,
+            img: productImg,
+            popularity: productPopularity,
+            sale: productAmount,
+            colors: productColors,
+        }
+
+        fetch(`http://localhost:8000/api/products/${productID}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newPorductInfo)
+        })
+            .then(res => res.json())
+            .then(result => {
+                console.log(result)
+                getAllProducts()
+                setIsShowEditModal(false)
+            })
+
+            console.log("Submited")
+    } 
+
+
 
     return (
         <>
@@ -73,7 +113,7 @@ function ProductsTable() {
                                     <img src={product.img} alt="product img" className='product__table--img' />
                                 </td>
                                 <td className="product__table__header--info">{product.title}</td>
-                                <td className="product__table__header--info">{product.price} میلیون تومان</td>
+                                <td className="product__table__header--info">{product.price} تومان</td>
                                 <td className="product__table__header--info">{product.count}</td>
                                 <td className="product__table__header--info">
                                     <button className='product__table--btnInfo' onClick={() => {
@@ -85,7 +125,17 @@ function ProductsTable() {
                                         setIsShowDeleteModal(true)
                                         setProductID(product.id)
                                     }}>حذف</button>
-                                    <button className='product__table--btnEdit' onClick={() => setIsShowEditModal(true)}>ویرایش</button>
+                                    <button className='product__table--btnEdit' onClick={() => {
+                                        setIsShowEditModal(true)
+                                        setProductID(product.id)
+                                        setProductTitle(product.title)
+                                        setProductPrice(product.price)
+                                        setProductCount(product.count)
+                                        setProductImg(product.img)
+                                        setProductPopularity(product.popularity)
+                                        setProductAmount(product.sale)
+                                        setProductColors(product.colors)
+                                    }}>ویرایش</button>
                                 </td>
                             </tr>
                         ))}
@@ -132,44 +182,86 @@ function ProductsTable() {
 
                     <div className="product__table__form__group">
                         <span className="product__table__form__group__icon">
-                            <BsCurrencyDollar />
+                            <MdTitle />
                         </span>
-                        <input className="product__table__form__group__input" type="text" placeholder='عنوان جدید را وارد کنید' />
+                        <input
+                            className="product__table__form__group__input"
+                            value={productTitle}
+                            onChange={(event) => setProductTitle(event.target.value)}
+                            type="text"
+                            placeholder='عنوان جدید محصول را وارد کنید' />
                     </div>
 
                     <div className="product__table__form__group">
                         <span className="product__table__form__group__icon">
                             <BsCurrencyDollar />
                         </span>
-                        <input className="product__table__form__group__input" type="text" placeholder='' />
+                        <input
+                            className="product__table__form__group__input"
+                            value={productPrice}
+                            onChange={(event) => setProductPrice(event.target.value)}
+                            type="text"
+                            placeholder='قیمت جدید محصول را وارد کنید' />
                     </div>
 
                     <div className="product__table__form__group">
                         <span className="product__table__form__group__icon">
-                            <BsCurrencyDollar />
+                            <MdInventory2 />
                         </span>
-                        <input className="product__table__form__group__input" type="text" placeholder='' />
+                        <input
+                            className="product__table__form__group__input"
+                            value={productCount}
+                            onChange={(event) => setProductCount(event.target.value)}
+                            type="text"
+                            placeholder='موجودی جدید محصول را وارد کنید' />
                     </div>
 
                     <div className="product__table__form__group">
                         <span className="product__table__form__group__icon">
-                            <BsCurrencyDollar />
+                            <BsFileImage />
                         </span>
-                        <input className="product__table__form__group__input" type="text" placeholder='' />
+                        <input
+                            className="product__table__form__group__input"
+                            value={productImg}
+                            onChange={(event) => setProductImg(event.target.value)}
+                            type="text"
+                            placeholder='آدرس کاور جدید محصول را وارد کنید' />
                     </div>
 
                     <div className="product__table__form__group">
                         <span className="product__table__form__group__icon">
-                            <BsCurrencyDollar />
+                            <AiFillLike />
                         </span>
-                        <input className="product__table__form__group__input" type="text" placeholder='' />
+                        <input
+                            className="product__table__form__group__input"
+                            value={productPopularity}
+                            onChange={(event) => setProductPopularity(event.target.value)}
+                            type="text"
+                            placeholder='میزان محبوبیت محصول را وارد کنید' />
                     </div>
 
                     <div className="product__table__form__group">
                         <span className="product__table__form__group__icon">
-                            <BsCurrencyDollar />
+                            <FaSortAmountUp />
                         </span>
-                        <input className="product__table__form__group__input" type="text" placeholder='' />
+                        <input
+                            className="product__table__form__group__input"
+                            value={productAmount}
+                            onChange={(event) => setProductAmount(event.target.value)}
+                            type="text"
+                            placeholder='میزان فروش محصول را وارد کنید' />
+                    </div>
+
+                    <div className="product__table__form__group">
+                        <span className="product__table__form__group__icon">
+                            <HiColorSwatch />
+                        </span>
+                        <input
+                            className="product__table__form__group__input"
+                            value={productColors}
+                            onChange={(event) => setProductColors(event.target.value)}
+                            type="text"
+                            placeholder='تعداد رنگ بندی' />
                     </div>
 
                 </EditModal>}
