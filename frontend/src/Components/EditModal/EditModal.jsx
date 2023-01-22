@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { motion, AnimatePresence } from "framer-motion"
 import "./EditModal.css"
 
-export default function EditModal({ children, onClose, onSubmit }) {
+function EditModal({ children, onClose, onSubmit }) {
     useEffect(() => {
         const checkEvent = (event) => {
             if (event.keyCode === 27) {
@@ -25,7 +25,6 @@ export default function EditModal({ children, onClose, onSubmit }) {
                 <form className="editModal__form">
                     <h1 className="editModal__form__title">اطلاعات جدید را وارد نمایید</h1>
                     {children}
-
                     <button className="editModal__form__submit" onClick={onSubmit}>ثبت</button>
                 </form>
             </motion.div>
@@ -33,3 +32,5 @@ export default function EditModal({ children, onClose, onSubmit }) {
 
     )
 }
+
+export default EditModal

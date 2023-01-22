@@ -9,12 +9,14 @@ import "./Comments.css"
 import ErrorBox from "../ErrorBox/ErrorBox"
 import DetailsModal from '../DetailsModal/DetailsModal';
 import DeleteModal from '../DeleteModal/DeleteModal';
+import EditModal from "../EditModal/EditModal"
 
 function Comments() {
 
   const [allComments, setAllComments] = useState([])
   const [isShowCommentModal, setIsShowCommentModal] = useState(false)
   const [isShowDeleteModal, setIsShowDeleteModal] = useState(false)
+  const [isShowEditModal, setIsShowEditeModal] = useState(false)
   const [mainCommentBody, setMainCommentBody] = useState("")
   const [commentID, setCommentID] = useState('')
 
@@ -22,14 +24,15 @@ function Comments() {
     getAllComments()
   }, [])
 
-  function getAllComments () {
+  function getAllComments() {
     fetch('http://localhost:8000/api/comments')
-    .then(res => res.json())
-    .then(comments => { setAllComments(comments) })
+      .then(res => res.json())
+      .then(comments => { setAllComments(comments) })
   }
 
   const closeCommentModal = () => setIsShowCommentModal(false)
   const closeDeleteModal = () => setIsShowDeleteModal(false)
+  const closeEditModal = () => setIsShowEditeModal(false)
 
   const deleteComment = () => {
     fetch(`http://localhost:8000/api/comments/${commentID}`, {
@@ -42,6 +45,25 @@ function Comments() {
       })
 
     setIsShowDeleteModal(false)
+  }
+
+  const updateCommrentBody = (event) => {
+    event.preventDefault()
+
+    fetch(`http://localhost:8000/api/comments/${commentID}`, {
+      method: 'PUT',
+      headers: {
+        'Content-type' : 'application/json'
+      },
+      body: JSON.stringify({
+        body: mainCommentBody
+      })
+    })
+    .then(res => res.json())
+    .then(result => {
+      getAllComments()
+      closeEditModal()
+    })
   }
 
   return (
@@ -77,7 +99,11 @@ function Comments() {
                 <td>{comment.date}</td>
                 <td>{comment.hour}</td>
                 <td>
-                  <button>
+                  <button onClick={() => {
+                    setIsShowEditeModal(true)
+                    setMainCommentBody(comment.body)
+                    setCommentID(comment.id)
+                  }}>
                     <BiCommentEdit />
                   </button>
                   <button >
@@ -105,12 +131,13 @@ function Comments() {
       {
         isShowCommentModal &&
         <DetailsModal onHide={closeCommentModal}>
-          <p
-            className='text-modal'>{mainCommentBody}</p>
+          <p 
+          className='text-modal'>{mainCommentBody}
+          </p>
           <button
             className='text-modal-close-btn'
-            onClick={closeCommentModal}
-          >بستن</button>
+            onClick={closeCommentModal}>بستن
+          </button>
         </DetailsModal>
       }
 
@@ -120,6 +147,18 @@ function Comments() {
           cancleAction={closeDeleteModal}
           submitAction={deleteComment}
         />
+      }
+
+      {
+        isShowEditModal &&
+        <EditModal
+          onClose={closeEditModal}
+          onSubmit={updateCommrentBody}
+        >
+          <textarea value={mainCommentBody} onChange={(event) => setMainCommentBody(event.target.value)}>
+            
+          </textarea>
+        </EditModal>
       }
     </div>
   )
