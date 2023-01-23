@@ -29,8 +29,8 @@ function Comments() {
 
   function getAllComments() {
     fetch('http://localhost:8000/api/comments')
-      .then(res => res.json())
-      .then(comments => { setAllComments(comments) })
+    .then(res => res.json())
+    .then(comments => setAllComments(comments))
   }
 
   const closeCommentModal = () => setIsShowCommentModal(false)

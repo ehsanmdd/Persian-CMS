@@ -6,14 +6,7 @@ const commentsRouter = express.Router();
 // routes
 
 commentsRouter.get("/", (req, res) => {
-  let selectAllCommentsQuery = `SELECT Comments.id, 
-  Comments.isAccept , 
-  Comments.body,
-  Comments.date, 
-  Comments.hour, 
-  Users.firsname as userID, 
-  Products.title as productID FROM Comments INNER JOIN Users ON Users.id = 
-  Comments.userID INNER JOIN Products ON Products.id = Comments.productID`;
+  let selectAllCommentsQuery = `SELECT Comments.id, Comments.isAccept , Comments.body, Comments.date, Comments.hour, Users.firstname as userID, Products.title as productID FROM Comments INNER JOIN Users ON Users.id = Comments.userID INNER JOIN Products ON Products.id = Comments.productID`;
 
   PersianCMSDB.query(selectAllCommentsQuery, (err, result) => {
     if (err) {
@@ -77,6 +70,5 @@ commentsRouter.post("/reject/:commentID", (req, res) => {
     }
   });
 });
-
 
 module.exports = commentsRouter;

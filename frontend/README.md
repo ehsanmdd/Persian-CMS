@@ -18,5 +18,3 @@ Bugs :
 Feature :
 - add notification when product delete or add.
 - change product price to local number.
-
-images/Avatar/UserImage-26.jpg
