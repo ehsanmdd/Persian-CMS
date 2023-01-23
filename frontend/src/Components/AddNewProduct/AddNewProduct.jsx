@@ -54,7 +54,6 @@ function AddNewProduct({ getAllProducts }) {
     return (
         <div className="addProduct">
             <h1 className="addProduct__title">افزودن محصول جدید</h1>
-
             <form action="#" className="addProduct__form">
                 <div className="addProdcut__form__wrapper">
                     <div className="addProduct__form__group">

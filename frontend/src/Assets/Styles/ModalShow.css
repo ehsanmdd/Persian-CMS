@@ -26,6 +26,13 @@
     border-radius: 25px;
 }
 
+.table__title {
+    font-weight: bold;
+    font-size: 2rem;
+    margin: 2rem 10rem;
+    color: var(--color-dark);
+}
+
 .table__content {
     width: 80%;
     border-radius: 10px;
@@ -35,6 +42,7 @@
     box-shadow: var(--box-shadow-1);
     transition: all 300ms ease;
 }
+
 .table__content:hover {
     box-shadow: none;
 }

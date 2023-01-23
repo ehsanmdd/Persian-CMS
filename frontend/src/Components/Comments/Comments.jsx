@@ -97,11 +97,11 @@ function Comments() {
 
     setIsShowAcceptModal(false)
   }
-  
+
   return (
     <div className='table__container'>
 
-
+      <h1 className="table__title">لیست کامنت ها</h1>
       {allComments.length ? (
         <table className="table__content">
           <thead>

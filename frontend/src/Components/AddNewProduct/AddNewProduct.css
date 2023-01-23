@@ -5,6 +5,7 @@
 }
 .addProduct__title {
     font-size: 2rem;
+    font-weight: bold;
     color: var(--color-dark);
 }
 .addProduct__form {
