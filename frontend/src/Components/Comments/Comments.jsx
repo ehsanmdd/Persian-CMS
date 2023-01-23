@@ -4,6 +4,7 @@ import { MdOutlineDeleteForever } from 'react-icons/md';
 import { AiOutlineCheck } from 'react-icons/ai';
 import { MdOutlineQuestionAnswer } from 'react-icons/md';
 import { BiCommentEdit } from 'react-icons/bi';
+import { TfiClose } from 'react-icons/tfi';
 
 import "./Comments.css"
 import ErrorBox from "../ErrorBox/ErrorBox"
@@ -17,6 +18,8 @@ function Comments() {
   const [isShowCommentModal, setIsShowCommentModal] = useState(false)
   const [isShowDeleteModal, setIsShowDeleteModal] = useState(false)
   const [isShowEditModal, setIsShowEditeModal] = useState(false)
+  const [isShowAcceptModal, setIsShowAcceptModal] = useState(false)
+  const [isShowRejectModal, setIsShowRejectModal] = useState(false)
   const [mainCommentBody, setMainCommentBody] = useState("")
   const [commentID, setCommentID] = useState('')
 
@@ -33,6 +36,8 @@ function Comments() {
   const closeCommentModal = () => setIsShowCommentModal(false)
   const closeDeleteModal = () => setIsShowDeleteModal(false)
   const closeEditModal = () => setIsShowEditeModal(false)
+  const closeAcceptModal = () => setIsShowAcceptModal(false)
+  const closeRejectModal = () => setIsShowRejectModal(false)
 
   const deleteComment = () => {
     fetch(`http://localhost:8000/api/comments/${commentID}`, {
@@ -47,25 +52,52 @@ function Comments() {
     setIsShowDeleteModal(false)
   }
 
-  const updateCommrentBody = (event) => {
+  const updateCommentBody = (event) => {
     event.preventDefault()
 
     fetch(`http://localhost:8000/api/comments/${commentID}`, {
       method: 'PUT',
       headers: {
-        'Content-type' : 'application/json'
+        'Content-type': 'application/json'
       },
       body: JSON.stringify({
         body: mainCommentBody
       })
     })
-    .then(res => res.json())
-    .then(result => {
-      getAllComments()
-      closeEditModal()
-    })
+      .then(res => res.json())
+      .then(result => {
+        getAllComments()
+        closeEditModal()
+      })
   }
 
+  const acceptComment = () => {
+    fetch(`http://localhost:8000/api/comments/accept/${commentID}`, {
+      method: 'POST'
+    })
+      .then(res => res.json())
+      .then(resualt => {
+        getAllComments()
+        setIsShowAcceptModal(false)
+      })
+
+    setIsShowAcceptModal(false)
+  }
+
+  const rejectComment = () => {
+    fetch(`http://localhost:8000/api/comments/reject/${commentID}`, {
+      method: 'POST'
+    })
+      .then(res => res.json())
+      .then(result => {
+        console.log(result);
+        getAllComments()
+        setIsShowRejectModal(false)
+      })
+
+    setIsShowAcceptModal(false)
+  }
+  
   return (
     <div className='table__container'>
 
@@ -115,9 +147,30 @@ function Comments() {
                   }}>
                     <MdOutlineDeleteForever />
                   </button>
-                  <button className='table__content--accept'>
-                    <AiOutlineCheck />
-                  </button>
+                  {
+                    comment.isAccept === 0 && (
+                      <button className='table__content--accept'
+                        onClick={() => {
+                          setCommentID(comment.id)
+                          setIsShowAcceptModal(true)
+                        }}
+                      >
+                        <AiOutlineCheck />
+                      </button>
+                    )
+                  }
+                  {
+                    comment.isAccept === 1 && (
+                      <button className='table__content--delete'
+                        onClick={() => {
+                          setCommentID(comment.id)
+                          setIsShowRejectModal(true)
+                        }}
+                      >
+                        <TfiClose />
+                      </button>
+                    )
+                  }
                 </td>
               </tr>
             ))}
@@ -131,8 +184,8 @@ function Comments() {
       {
         isShowCommentModal &&
         <DetailsModal onHide={closeCommentModal}>
-          <p 
-          className='text-modal'>{mainCommentBody}
+          <p
+            className='text-modal'>{mainCommentBody}
           </p>
           <button
             className='text-modal-close-btn'
@@ -144,6 +197,7 @@ function Comments() {
       {
         isShowDeleteModal &&
         <DeleteModal
+          title={"آیا از حذف اطمینان دارید"}
           cancleAction={closeDeleteModal}
           submitAction={deleteComment}
         />
@@ -153,12 +207,29 @@ function Comments() {
         isShowEditModal &&
         <EditModal
           onClose={closeEditModal}
-          onSubmit={updateCommrentBody}
+          onSubmit={updateCommentBody}
         >
           <textarea value={mainCommentBody} onChange={(event) => setMainCommentBody(event.target.value)}>
-            
+
           </textarea>
         </EditModal>
+      }
+
+      {
+        isShowAcceptModal &&
+        <DeleteModal
+          title={"آیا از تایید اطمینان دارید"}
+          cancleAction={closeAcceptModal}
+          submitAction={acceptComment}
+        />
+      }
+      {
+        isShowRejectModal &&
+        <DeleteModal
+          title={"آیا از رد کردن اطمینان دارید"}
+          cancleAction={closeRejectModal}
+          submitAction={rejectComment}
+        />
       }
     </div>
   )

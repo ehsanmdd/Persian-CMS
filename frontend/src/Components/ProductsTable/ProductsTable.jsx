@@ -13,7 +13,7 @@ import EditModal from '../EditModal/EditModal'
 import ErrorBox from '../ErrorBox/ErrorBox';
 import "./ProductsTable.css"
 
-function ProductsTable({allProducts, getAllProducts}) {
+function ProductsTable({ allProducts, getAllProducts }) {
 
 
     const [isShowDeleteModal, setIsShowDeleteModal] = useState(false)
@@ -68,7 +68,7 @@ function ProductsTable({allProducts, getAllProducts}) {
         fetch(`http://localhost:8000/api/products/${productID}`, {
             method: 'PUT',
             headers: {
-              'Content-Type': 'application/json'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(newPorductInfo)
         })
@@ -79,8 +79,8 @@ function ProductsTable({allProducts, getAllProducts}) {
                 setIsShowEditModal(false)
             })
 
-            console.log("Submited")
-    } 
+        console.log("Submited")
+    }
 
 
 
@@ -138,6 +138,7 @@ function ProductsTable({allProducts, getAllProducts}) {
             {
                 isShowDeleteModal &&
                 <DeleteModal
+                    title={"آیا از خذف اطمینان دارید"}
                     submitAction={modalSubmitAction}
                     cancleAction={modalCancelAction}
                 />
