@@ -85,27 +85,27 @@ function ProductsTable({ allProducts, getAllProducts }) {
 
 
     return (
-        <>
+        <div className='table__container'>
             {allProducts.length ? (
-                <table className="products__table">
+                <table className="table__content">
                     <thead>
-                        <tr className="product__table__header">
-                            <th className='product__table__header--title'>عکس</th>
-                            <th className='product__table__header--title'>اسم محصول</th>
-                            <th className='product__table__header--title'>قیمت</th>
-                            <th className='product__table__header--title'>موجودی</th>
+                        <tr>
+                            <th>عکس</th>
+                            <th>اسم محصول</th>
+                            <th>قیمت</th>
+                            <th>موجودی</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {allProducts.reverse().map(product => (
-                            <tr key={product.id} className="product__table__body">
-                                <td className="product__table__header--info">
+                        { allProducts.map(product => (
+                            <tr key={product.id} >
+                                <td>
                                     <img src={product.img} alt="product img" className='product__table--img' />
                                 </td>
-                                <td className="product__table__header--info">{product.title}</td>
-                                <td className="product__table__header--info">{product.price} تومان</td>
-                                <td className="product__table__header--info">{product.count}</td>
-                                <td className="product__table__header--info">
+                                <td>{product.title}</td>
+                                <td>{product.price} تومان</td>
+                                <td>{product.count}</td>
+                                <td>
                                     <button className='product__table--btnInfo' onClick={() => {
                                         setIsShowDetailsModal(true)
                                         setMainProductInfo(product)
@@ -170,93 +170,93 @@ function ProductsTable({ allProducts, getAllProducts }) {
                 <EditModal
                     onClose={() => setIsShowEditModal(false)}
                     onSubmit={updateProductInfo}>
+                    <div className='edit__info__input__container'>
+                        <div className="edit__user__info__input__group">
+                            <span>
+                                <MdTitle />
+                            </span>
+                            <input
+                                className="edit__user__info__input"
+                                value={productTitle}
+                                onChange={(event) => setProductTitle(event.target.value)}
+                                type="text"
+                                placeholder='عنوان جدید محصول را وارد کنید' />
+                        </div>
 
-                    <div className="product__table__form__group">
-                        <span className="product__table__form__group__icon">
-                            <MdTitle />
-                        </span>
-                        <input
-                            className="product__table__form__group__input"
-                            value={productTitle}
-                            onChange={(event) => setProductTitle(event.target.value)}
-                            type="text"
-                            placeholder='عنوان جدید محصول را وارد کنید' />
+                        <div className="edit__user__info__input__group">
+                            <span>
+                                <BsCurrencyDollar />
+                            </span>
+                            <input
+                                className="edit__user__info__input"
+                                value={productPrice}
+                                onChange={(event) => setProductPrice(event.target.value)}
+                                type="text"
+                                placeholder='قیمت جدید محصول را وارد کنید' />
+                        </div>
+
+                        <div className="edit__user__info__input__group">
+                            <span>
+                                <MdInventory2 />
+                            </span>
+                            <input
+                                className="edit__user__info__input"
+                                value={productCount}
+                                onChange={(event) => setProductCount(event.target.value)}
+                                type="text"
+                                placeholder='موجودی جدید محصول را وارد کنید' />
+                        </div>
+
+                        <div className="edit__user__info__input__group">
+                            <span>
+                                <BsFileImage />
+                            </span>
+                            <input
+                                className="edit__user__info__input"
+                                value={productImg}
+                                onChange={(event) => setProductImg(event.target.value)}
+                                type="text"
+                                placeholder='آدرس کاور جدید محصول را وارد کنید' />
+                        </div>
+
+                        <div className="edit__user__info__input__group">
+                            <span>
+                                <AiFillLike />
+                            </span>
+                            <input
+                                className="edit__user__info__input"
+                                value={productPopularity}
+                                onChange={(event) => setProductPopularity(event.target.value)}
+                                type="text"
+                                placeholder='میزان محبوبیت محصول را وارد کنید' />
+                        </div>
+
+                        <div className="edit__user__info__input__group">
+                            <span>
+                                <FaSortAmountUp />
+                            </span>
+                            <input
+                                className="edit__user__info__input"
+                                value={productAmount}
+                                onChange={(event) => setProductAmount(event.target.value)}
+                                type="text"
+                                placeholder='میزان فروش محصول را وارد کنید' />
+                        </div>
+
+                        <div className="edit__user__info__input__group">
+                            <span>
+                                <HiColorSwatch />
+                            </span>
+                            <input
+                                className="edit__user__info__input"
+                                value={productColors}
+                                onChange={(event) => setProductColors(event.target.value)}
+                                type="text"
+                                placeholder='تعداد رنگ بندی' />
+                        </div>
                     </div>
-
-                    <div className="product__table__form__group">
-                        <span className="product__table__form__group__icon">
-                            <BsCurrencyDollar />
-                        </span>
-                        <input
-                            className="product__table__form__group__input"
-                            value={productPrice}
-                            onChange={(event) => setProductPrice(event.target.value)}
-                            type="text"
-                            placeholder='قیمت جدید محصول را وارد کنید' />
-                    </div>
-
-                    <div className="product__table__form__group">
-                        <span className="product__table__form__group__icon">
-                            <MdInventory2 />
-                        </span>
-                        <input
-                            className="product__table__form__group__input"
-                            value={productCount}
-                            onChange={(event) => setProductCount(event.target.value)}
-                            type="text"
-                            placeholder='موجودی جدید محصول را وارد کنید' />
-                    </div>
-
-                    <div className="product__table__form__group">
-                        <span className="product__table__form__group__icon">
-                            <BsFileImage />
-                        </span>
-                        <input
-                            className="product__table__form__group__input"
-                            value={productImg}
-                            onChange={(event) => setProductImg(event.target.value)}
-                            type="text"
-                            placeholder='آدرس کاور جدید محصول را وارد کنید' />
-                    </div>
-
-                    <div className="product__table__form__group">
-                        <span className="product__table__form__group__icon">
-                            <AiFillLike />
-                        </span>
-                        <input
-                            className="product__table__form__group__input"
-                            value={productPopularity}
-                            onChange={(event) => setProductPopularity(event.target.value)}
-                            type="text"
-                            placeholder='میزان محبوبیت محصول را وارد کنید' />
-                    </div>
-
-                    <div className="product__table__form__group">
-                        <span className="product__table__form__group__icon">
-                            <FaSortAmountUp />
-                        </span>
-                        <input
-                            className="product__table__form__group__input"
-                            value={productAmount}
-                            onChange={(event) => setProductAmount(event.target.value)}
-                            type="text"
-                            placeholder='میزان فروش محصول را وارد کنید' />
-                    </div>
-
-                    <div className="product__table__form__group">
-                        <span className="product__table__form__group__icon">
-                            <HiColorSwatch />
-                        </span>
-                        <input
-                            className="product__table__form__group__input"
-                            value={productColors}
-                            onChange={(event) => setProductColors(event.target.value)}
-                            type="text"
-                            placeholder='تعداد رنگ بندی' />
-                    </div>
-
                 </EditModal>}
-        </>
+        </div>
     )
 }
 

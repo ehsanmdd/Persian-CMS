@@ -7,6 +7,9 @@ import { AiOutlineUser } from 'react-icons/ai';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import { AiTwotonePhone } from 'react-icons/ai';
 import { MdOutlineAlternateEmail } from 'react-icons/md';
+import { ImLocation } from 'react-icons/im';
+import { SiGoogleanalytics } from 'react-icons/si';
+import { BiPurchaseTagAlt } from 'react-icons/bi';
 
 import ErrorBox from "../ErrorBox/ErrorBox"
 import DeleteModal from '../DeleteModal/DeleteModal';
@@ -65,14 +68,35 @@ function Users() {
       })
   }
 
-  const updateUserInfo = () => {
-    fetch(`http://localhost:8000/api/users/${userID}`,{
-      method: 'POST',
+  const updateUserInformation = {
+    firstname: editUserFirtsName,
+    lastname: editUserLastName,
+    username: editUserUsername,
+    password: editUserPassword,
+    phone: editUserPhoneNumber,
+    email: editUserEmail,
+    city: editUserCity,
+    address: editUserAddress,
+    score: editUserScore,
+    buy: editUserBuy,
+  }
+
+  const updateUserInfo = (event) => {
+    event.preventDefault()
+
+    fetch(`http://localhost:8000/api/users/${userID}`, {
+      method: 'PUT',
       headers: {
-        'Content-Type' : 'application/json'
+        'Content-Type': 'application/json'
       },
-      body : 
+      body: JSON.stringify(updateUserInformation)
     })
+      .then(res => res.json())
+      .then(result => {
+        console.log(result);
+        getAllUsers()
+        setIsShowEditModal(false)
+      })
   }
 
   return (
@@ -108,6 +132,16 @@ function Users() {
                   <button
                     onClick={() => {
                       setUserID(user.id)
+                      setEditUserFirtsName(user.firstname)
+                      setEditUserLastName(user.lastname)
+                      setEditUserUsername(user.username)
+                      setEditUserPassword(user.password)
+                      setEditUserPhoneNumber(user.phone)
+                      setEditUserEmail(user.email)
+                      setEditUserCity(user.city)
+                      setEditUserAddress(user.address)
+                      setEditUserScore(user.score)
+                      setEditUserBuy(user.buy)
                       setIsShowEditModal(true)
                     }}
                   ><FaUserEdit /></button>
@@ -142,7 +176,27 @@ function Users() {
         <DetailsModal
           onHide={closeDetailModal}
         >
-
+          <table>
+            <thead>
+              <tr>
+                <th>شهر</th>
+                <th>آدرس</th>
+                <th>امتیاز</th>
+                <th>مجموع خرید</th>
+                <th></th>
+              </tr>
+            </thead>
+            {users.map(userInfo => (
+              <tbody className='details__modal__table'>
+                <tr>
+                  <td>{userInfo.city}</td>
+                  <td>{userInfo.address}</td>
+                  <td>{userInfo.score}</td>
+                  <td>{userInfo.buy}</td>
+                </tr>
+              </tbody>
+            ))}
+          </table>
         </DetailsModal>
       }
       {
@@ -153,31 +207,111 @@ function Users() {
               <span>
                 <MdDriveFileRenameOutline />
               </span>
-              <input type="text" className='edit__user__info__input' placeholder='مقدار جدید نام و نام خانوادگی را وارد نمایید' />
+              <input
+                type="text"
+                value={editUserFirtsName}
+                onChange={(event) => setEditUserFirtsName(event.target.value)}
+                className='edit__user__info__input'
+                placeholder='مقدار جدید نام را وارد نمایید' />
+            </div>
+            <div className="edit__user__info__input__group">
+              <span>
+                <MdDriveFileRenameOutline />
+              </span>
+              <input
+                type="text"
+                value={editUserLastName}
+                onChange={(event) => setEditUserLastName(event.target.value)}
+                className='edit__user__info__input'
+                placeholder='مقدار جدید نام خانوادگی را وارد نمایید' />
             </div>
             <div className="edit__user__info__input__group">
               <span>
                 <AiOutlineUser />
               </span>
-              <input type="text" className='edit__user__info__input' placeholder='مقدار جدید نام کاربری را وارد نمایید' />
+              <input
+                type="text"
+                value={editUserUsername}
+                onChange={(event) => setEditUserUsername(event.target.value)}
+                className='edit__user__info__input'
+                placeholder='مقدار جدید نام کاربری را وارد نمایید' />
             </div>
             <div className="edit__user__info__input__group">
               <span>
                 <RiLockPasswordLine />
               </span>
-              <input type="text" className='edit__user__info__input' placeholder='مقدار جدید رمز عبور را وارد نمایید' />
+              <input
+                type="text"
+                value={editUserPassword}
+                onChange={(event) => setEditUserPassword(event.target.value)}
+                className='edit__user__info__input'
+                placeholder='مقدار جدید رمز عبور را وارد نمایید' />
             </div>
             <div className="edit__user__info__input__group">
               <span>
                 <AiTwotonePhone />
               </span>
-              <input type="text" className='edit__user__info__input' placeholder='مقدار جدید شماره تماس را وارد نمایید' />
+              <input
+                type="text"
+                value={editUserPhoneNumber}
+                onChange={(event) => setEditUserPhoneNumber(event.target.value)}
+                className='edit__user__info__input'
+                placeholder='مقدار جدید شماره تماس را وارد نمایید' />
             </div>
             <div className="edit__user__info__input__group">
               <span>
                 <MdOutlineAlternateEmail />
               </span>
-              <input type="text" className='edit__user__info__input' placeholder='مقدار جدید ایمیل را وارد نمایید' />
+              <input
+                type="text"
+                value={editUserEmail}
+                onChange={(event) => setEditUserEmail(event.target.value)}
+                className='edit__user__info__input'
+                placeholder='مقدار جدید ایمیل را وارد نمایید' />
+            </div>
+            <div className="edit__user__info__input__group">
+              <span>
+                <ImLocation />
+              </span>
+              <input
+                type="text"
+                value={editUserCity}
+                onChange={(event) => setEditUserCity(event.target.value)}
+                className='edit__user__info__input'
+                placeholder='مقدار جدید شهر را وارد نمایید' />
+            </div>
+            <div className="edit__user__info__input__group">
+              <span>
+                <ImLocation />
+              </span>
+              <input
+                type="text"
+                value={editUserAddress}
+                onChange={(event) => setEditUserAddress(event.target.value)}
+                className='edit__user__info__input'
+                placeholder='مقدار جدید آدرس را وارد نمایید' />
+            </div>
+            <div className="edit__user__info__input__group">
+              <span>
+                <SiGoogleanalytics />
+              </span>
+              <input
+                type="text"
+                value={editUserScore}
+                onChange={(event) => setEditUserScore(event.target.value)}
+                className='edit__user__info__input'
+                placeholder='مقدار جدید امتیاز را وارد نمایید' />
+            </div>
+            <div className="edit__user__info__input__group">
+              <span>
+                <BiPurchaseTagAlt />
+              </span>
+              <input
+                type="text"
+                value={editUserBuy}
+                onChange={(event) => setEditUserBuy(event.target.value)}
+                className='edit__user__info__input'
+                placeholder='مقدار جدید خرید کاربر را وارد نمایید' />
             </div>
           </div>
         </EditModal>

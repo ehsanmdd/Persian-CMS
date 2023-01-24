@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import AddNewProduct from '../AddNewProduct/AddNewProduct'
 import ProductsTable from '../ProductsTable/ProductsTable'
 export default function Products() {
@@ -7,18 +7,22 @@ export default function Products() {
 
   useEffect(() => {
     getAllProducts();
-}, [])
+  }, [])
 
-const getAllProducts = () => {
+  const getAllProducts = () => {
     fetch("http://localhost:8000/api/products/")
-        .then((res) => res.json())
-        .then((productsItem) => setAllProducts(productsItem))
-}
+      .then((res) => res.json())
+      .then((productsItem) => {
+        productsItem.reverse()
+        setAllProducts(productsItem)})
+  }
+
+
 
   return (
     <>
-      <AddNewProduct allProducts={allProducts} getAllProducts={getAllProducts}/>
-      <ProductsTable allProducts={allProducts} getAllProducts={getAllProducts}/>
+      <AddNewProduct allProducts={allProducts} getAllProducts={getAllProducts} />
+      <ProductsTable allProducts={allProducts} getAllProducts={getAllProducts} />
     </>
   )
 }

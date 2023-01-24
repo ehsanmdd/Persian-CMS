@@ -38,7 +38,7 @@
 .product__table--btnInfo {
     all: unset;
     padding: 0.6rem 0.7rem;
-    font-size: .8rem;
+    font-size: 1rem !important;
     margin: 2px;
     display: flex;
     align-items: center;
@@ -76,8 +76,4 @@
     background: unset;
     width: 100%;
 }
-.product__table__form__group__input::placeholder {
-
-}
-
 /* /Edit Modal Childrer Style */

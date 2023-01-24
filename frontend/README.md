@@ -11,6 +11,7 @@ Bugs :
 - delete product button not work for all data.
 - reverse product list then render the DOM.         fixed
 - check edit modal css in comment component.        fixed
+- revesed product list before show.                 fixed
 
 
 ---------------------------------------------------

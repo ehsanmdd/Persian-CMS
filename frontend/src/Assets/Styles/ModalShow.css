@@ -76,3 +76,34 @@
     background-color: rgb(35, 192, 106);
 }
 /* /Table Style */
+
+/* Edit Modal Custom Css */
+
+.edit__info__input__container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 2rem 0;
+}
+
+.edit__user__info__input__group {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .3rem .5rem;
+    margin: .5rem 1rem;
+    background-color: var(--color-light);
+    border-radius: .5rem;
+    color: gray;
+}
+
+.edit__user__info__input {
+    border: none;
+    width: 100%;
+    background: none;
+    outline: none;
+    padding-right: .5rem;
+}
+
+/* /Edit Modal Custom Css */

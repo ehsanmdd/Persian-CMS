@@ -34,7 +34,7 @@ usersRouter.put("/:userID", (req, res) => {
   let userID = req.params.userID;
   let body = req.body;
 
-  let editUserQuery = `UPDATE Users SET firstname="${body.firsname}", lastname="${body.lastname}", username="${body.username}", password="${body.password}", phone=${body.phone}, city="${body.city}", email="${body.email}", address="${body.address}" ,score=${body.score}, buy=${body.buy}, img=${body.img} WHERE id = ${userID}`;
+  let editUserQuery = `UPDATE Users SET firstname="${body.firstname}", lastname="${body.lastname}", username="${body.username}", password="${body.password}", phone=${body.phone}, city="${body.city}", email="${body.email}", address="${body.address}" ,score=${body.score}, buy=${body.buy} WHERE id = ${userID}`;
 
   PersianCMSDB.query(editUserQuery, (err, result) => {
     if (err) {
